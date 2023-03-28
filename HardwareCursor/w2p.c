@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
-#include "patch.h"
-#include "ini.h"
+#include "../inc/patch.h"
+#include "../inc/ini.h"
 
 
 #define FILE_EXISTS(a) (GetFileAttributes(a) != INVALID_FILE_ATTRIBUTES)

@@ -1,10 +1,10 @@
 #include <windows.h>
 #include <stdio.h>
-#include "patch.h"
+#include "../inc/patch.h"
 
 
 #define W2_HWND *((HWND*)0x004CE7B8)
-#define W2_MY_PLAYER_ID *((HWND*)0x004A70AC)
+#define W2_MY_PLAYER_ID *((int*)0x004A70AC)
 
 PROC g_proc_00475A0F, g_proc_004781CA, g_proc_00478EDD, g_proc_00475A7A, 
      g_proc_00473A63, g_proc_00420F36, g_proc_0046D912;

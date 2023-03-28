@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <stdio.h>
-#include "patch.h"
+#include "../inc/patch.h"
 
 PROC g_proc_0000846A, g_proc_004739F5, g_proc_00006C21, g_proc_00006CB3, 
      g_proc_00473A63, g_proc_00473A35, g_proc_0046D062, g_proc_0042CB3B,

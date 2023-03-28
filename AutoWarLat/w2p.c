@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "patch.h"
+#include "../inc/patch.h"
 
 PROC g_proc_00420E00;
 

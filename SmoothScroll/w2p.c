@@ -1,5 +1,6 @@
 #include <windows.h>
-#include "patch.h"
+#include "../inc/patch.h"
+#include "../inc/ini.h"
 
 
 void __declspec(dllexport) w2p_init()
