@@ -1,8 +1,8 @@
 #ifndef INI_H 
 #define INI_H 
 
-#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <stdio.h>
 
 static inline DWORD ini_get_string(
     LPCSTR section, LPCSTR key, LPCSTR default_value, LPSTR out_string, DWORD out_size, LPCSTR file_name)

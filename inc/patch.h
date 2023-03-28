@@ -52,7 +52,7 @@ static inline WORD patch_setword(WORD *dst, WORD value)
     return org;
 }
 
-static inline WORD patch_setbyte(BYTE *dst, BYTE value)
+static inline BYTE patch_setbyte(BYTE *dst, BYTE value)
 {
     DWORD op = PAGE_EXECUTE_READ;
     VirtualProtect(dst, sizeof(BYTE), PAGE_EXECUTE_READWRITE, &op);
