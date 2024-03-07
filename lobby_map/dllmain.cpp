@@ -6,9 +6,9 @@
   
 #include <windows.h>
 #include "lamb.h"
-#define THUMB_X 452
-#define THUMB_Y 106
 
+int g_thumb_x = 452;
+int g_thumb_y = 106;
 BOOL display_map_on = FALSE;
 int Htxos,Htyos;
 int Hscrw;
@@ -86,6 +86,9 @@ DWORD CALLBACK ThumbThread(LPVOID lpParam){
 
 
 extern "C" __declspec (dllexport) void w2p_init(){
+    g_thumb_x = GetPrivateProfileIntA("lobby_map", "x", 452, ".\\plugin\\lobby_map.ini");
+    g_thumb_y = GetPrivateProfileIntA("lobby_map", "y", 106, ".\\plugin\\lobby_map.ini");
+
     DWORD dw=0;
     
     CreateThread( NULL,
@@ -102,8 +105,8 @@ extern "C" __declspec (dllexport) void screen_update(DWORD location){
             //get_scr_info();
             thumb2=make_bitmap(thumb->width,thumb->height,8);
             CopyMemory(thumb2->pBits,thumb->pBits,tdatsize);
-            paste_cursor(thumb2,THUMB_X+Htxos,THUMB_Y+Htyos);                      
-            wc2bmPaste(thumb2,THUMB_X,THUMB_Y);
+            paste_cursor(thumb2, g_thumb_x +Htxos, g_thumb_y +Htyos);
+            wc2bmPaste(thumb2,g_thumb_x,g_thumb_y);
             //wc2bmPaste(thumb2,Htxos+THUMB_X,Htyos+THUMB_Y);
             free_bitmap(thumb2);
         }
