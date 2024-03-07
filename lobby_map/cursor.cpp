@@ -2,7 +2,7 @@
 #include "lamb.h"
 
 BOOL cursor_init = FALSE;
-HMIBMP* csrbmp = make_bitmap(26,32,8);
+HMIBMP* csrbmp;
 
 DWORD cursor[] = {0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0x00FFFFFF,0x95000091,0xFFFF0093,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0x00FFFFFF,0xA3950094,0x00009395,0xFFFFFFFF,0xFFFFFFFF,
 0xFFFFFFFF,0xFFFFFFFF,0x00FFFFFF,0xA3A3959B,0x9393A1A1,0xFFFFFF00,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0x9300FFFF,0xA5A4A396,0x90A3A3A5,0xFFFF0093,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,
@@ -24,16 +24,20 @@ DWORD cursor[] = {0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0x00FFFFFF,0x95000091,0xFFFF0
 
 
 HMIBMP* init_cursor(){
+    csrbmp = make_bitmap(28,32,8);
     CopyMemory(csrbmp->pBits,&cursor[0],0x380);
     cursor_init = TRUE;
+
+    return NULL;
 }
 
 
 void paste_cursor(HMIBMP* hbm, int dx, int dy){
     int cx,cy,col;
-    BYTE* pix = csrbmp->pBits;
+    
     WORD* pcsr=(WORD*)CURSOR_LOC;
     if(!cursor_init){init_cursor();}
+    BYTE* pix = csrbmp->pBits;
     
     cx=(int)*pcsr-3;
     pcsr++;

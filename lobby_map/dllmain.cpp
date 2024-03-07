@@ -59,7 +59,7 @@ BOOL check_dl(){
 }
 
 
-HMIBMP* thumb = make_bitmap(32,32,8);
+HMIBMP* thumb;
 HMIBMP* thumb2;
 int tdatsize;
 
@@ -110,7 +110,18 @@ extern "C" __declspec (dllexport) void screen_update(DWORD location){
     }
 }
 
-BOOL APIENTRY DllMain (  HINSTANCE hInst, DWORD reason, LPVOID reserved ){ return TRUE; }
+BOOL APIENTRY DllMain(HINSTANCE hInst, DWORD reason, LPVOID reserved)
+{
+    switch (reason)
+    {
+    case DLL_PROCESS_ATTACH:
+    {
+        thumb = make_bitmap(32, 32, 8);
+        break;
+    }
+    }
+    return TRUE;
+}
 
 
 
