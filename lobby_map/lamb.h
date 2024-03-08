@@ -219,6 +219,8 @@ extern BOOL safe_set_pixel(HMIBMP* hbm, int x, int y, int pval);
 #define MAP_LOBBY (CHAR*)0x004D3C9D
 #define GAME_MODE (CHAR*)0x004AE430
 
+extern DWORD tilecolors[];
+extern int playercolors[];
 
 
 #endif
