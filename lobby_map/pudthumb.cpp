@@ -44,28 +44,28 @@ int playercolors[] = {       0xA8,         // red
 #define OIL  0x00
 
 DWORD tilecolors[] = { 0,
-                       LTW,
-                       DKW,
+                       0xB7,
+                       0xB5,
                        LTM,
-                       DKM,
-                       LTG,
+                       0x46,
+                       0x97,
                        DKG,
-                       TRE,
-                       ROC,
-                       OWL,
-                       HWL,
+                       0x92,
+                       0x3B,
+                       0x6E,
+                       0x6F,
                        OWL,
                        HWL,
                     // --- //
-                       LTW,
-                       LTW,
-                       MUD_WAT,
-                       ROC_MUD,
+                       0xB6,
+                       0xB6,
+                       0x88,
+                       0x72,
                        LTM,
-                       LTG,
-                       TRE_GRA,
-                       OWL,
-                       HWL   };
+                       0x97,
+                       0x91,
+                       0x6E,
+                       0x6F };
 
 
 
