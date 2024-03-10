@@ -2,6 +2,7 @@
 #include "lamb.h"
 
 BOOL cursor_init = FALSE;
+BOOL cursor_disabled = FALSE;
 HMIBMP* csrbmp;
 
 DWORD cursor[] = {0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0x00FFFFFF,0x95000091,0xFFFF0093,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0x00FFFFFF,0xA3950094,0x00009395,0xFFFFFFFF,0xFFFFFFFF,
@@ -27,7 +28,7 @@ HMIBMP* init_cursor(){
     csrbmp = make_bitmap(28,32,8);
     CopyMemory(csrbmp->pBits,&cursor[0],0x380);
     cursor_init = TRUE;
-
+    cursor_disabled = GetModuleHandleA("HardwareCursor.w2p") != NULL;
     return NULL;
 }
 
@@ -37,6 +38,7 @@ void paste_cursor(HMIBMP* hbm, int dx, int dy){
     
     WORD* pcsr=(WORD*)CURSOR_LOC;
     if(!cursor_init){init_cursor();}
+    if (cursor_disabled) return;
     BYTE* pix = csrbmp->pBits;
     
     cx=(int)*pcsr-3;
