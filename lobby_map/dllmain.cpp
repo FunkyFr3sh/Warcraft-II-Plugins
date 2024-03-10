@@ -98,10 +98,10 @@ extern "C" __declspec (dllexport) void w2p_init(){
     tilecolors[6] = GetPrivateProfileIntA("colors", "tile6", 0x96, ".\\plugin\\lobby_map.ini");
     tilecolors[7] = GetPrivateProfileIntA("colors", "tile7", 0x92, ".\\plugin\\lobby_map.ini");
     tilecolors[8] = GetPrivateProfileIntA("colors", "tile8", 0x3B, ".\\plugin\\lobby_map.ini");
-    tilecolors[9] = GetPrivateProfileIntA("colors", "tile9", 0x6E, ".\\plugin\\lobby_map.ini");
-    tilecolors[10] = GetPrivateProfileIntA("colors", "tile10", 0x6F, ".\\plugin\\lobby_map.ini");
-    tilecolors[11] = GetPrivateProfileIntA("colors", "tile11", 0x7E, ".\\plugin\\lobby_map.ini");
-    tilecolors[12] = GetPrivateProfileIntA("colors", "tile12", 0x7F, ".\\plugin\\lobby_map.ini");
+    tilecolors[9] = GetPrivateProfileIntA("colors", "tile9", 0x6F, ".\\plugin\\lobby_map.ini");
+    tilecolors[10] = GetPrivateProfileIntA("colors", "tile10", 0x6E, ".\\plugin\\lobby_map.ini");
+    tilecolors[11] = GetPrivateProfileIntA("colors", "tile11", 0x6F, ".\\plugin\\lobby_map.ini");
+    tilecolors[12] = GetPrivateProfileIntA("colors", "tile12", 0x6E, ".\\plugin\\lobby_map.ini");
     tilecolors[13] = GetPrivateProfileIntA("colors", "tile13", 0xB6, ".\\plugin\\lobby_map.ini");
     tilecolors[14] = GetPrivateProfileIntA("colors", "tile14", 0xB6, ".\\plugin\\lobby_map.ini");
     tilecolors[15] = GetPrivateProfileIntA("colors", "tile15", 0x88, ".\\plugin\\lobby_map.ini");
@@ -109,17 +109,17 @@ extern "C" __declspec (dllexport) void w2p_init(){
     tilecolors[17] = GetPrivateProfileIntA("colors", "tile17", 0xAA, ".\\plugin\\lobby_map.ini");
     tilecolors[18] = GetPrivateProfileIntA("colors", "tile18", 0x97, ".\\plugin\\lobby_map.ini");
     tilecolors[19] = GetPrivateProfileIntA("colors", "tile19", 0x91, ".\\plugin\\lobby_map.ini");
-    tilecolors[20] = GetPrivateProfileIntA("colors", "tile20", 0x6E, ".\\plugin\\lobby_map.ini");
-    tilecolors[21] = GetPrivateProfileIntA("colors", "tile21", 0x6F, ".\\plugin\\lobby_map.ini");
+    tilecolors[20] = GetPrivateProfileIntA("colors", "tile20", 0x6F, ".\\plugin\\lobby_map.ini");
+    tilecolors[21] = GetPrivateProfileIntA("colors", "tile21", 0x6E, ".\\plugin\\lobby_map.ini");
 
     playercolors[0] = GetPrivateProfileIntA("colors", "player0", 0xA8, ".\\plugin\\lobby_map.ini");
     playercolors[1] = GetPrivateProfileIntA("colors", "player1", 0xD4, ".\\plugin\\lobby_map.ini");
     playercolors[2] = GetPrivateProfileIntA("colors", "player2", 0xD8, ".\\plugin\\lobby_map.ini");
-    playercolors[3] = GetPrivateProfileIntA("colors", "player3", 0xDD, ".\\plugin\\lobby_map.ini");
+    playercolors[3] = GetPrivateProfileIntA("colors", "player3", 0xDC, ".\\plugin\\lobby_map.ini");
     playercolors[4] = GetPrivateProfileIntA("colors", "player4", 0xE0, ".\\plugin\\lobby_map.ini");
     playercolors[5] = GetPrivateProfileIntA("colors", "player5", 0xEA, ".\\plugin\\lobby_map.ini");
-    playercolors[6] = GetPrivateProfileIntA("colors", "player6", 0xE8, ".\\plugin\\lobby_map.ini");
-    playercolors[7] = GetPrivateProfileIntA("colors", "player7", 0xFB, ".\\plugin\\lobby_map.ini");
+    playercolors[6] = GetPrivateProfileIntA("colors", "player6", 0xFF, ".\\plugin\\lobby_map.ini");
+    playercolors[7] = GetPrivateProfileIntA("colors", "player7", 0xC8, ".\\plugin\\lobby_map.ini");
 
     DWORD dw=0;
     
