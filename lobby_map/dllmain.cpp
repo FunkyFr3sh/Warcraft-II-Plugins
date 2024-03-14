@@ -121,6 +121,11 @@ extern "C" __declspec (dllexport) void w2p_init(){
     playercolors[6] = GetPrivateProfileIntA("colors", "player6", 0xFF, ".\\plugin\\lobby_map.ini");
     playercolors[7] = GetPrivateProfileIntA("colors", "player7", 0xC8, ".\\plugin\\lobby_map.ini");
 
+    g_gold_col = GetPrivateProfileIntA("colors", "gold", 0xFB, ".\\plugin\\lobby_map.ini");
+    g_oil_col = GetPrivateProfileIntA("colors", "oil", 0xFB, ".\\plugin\\lobby_map.ini");
+
+    g_thumb_size = GetPrivateProfileIntA("colors", "size", 1, ".\\plugin\\lobby_map.ini");
+
     DWORD dw=0;
     
     CreateThread( NULL,

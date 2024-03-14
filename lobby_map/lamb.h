@@ -221,6 +221,9 @@ extern BOOL safe_set_pixel(HMIBMP* hbm, int x, int y, int pval);
 
 extern DWORD tilecolors[];
 extern int playercolors[];
+extern BYTE g_gold_col;
+extern BYTE g_oil_col;
+extern BOOL g_thumb_size;
 
 
 #endif

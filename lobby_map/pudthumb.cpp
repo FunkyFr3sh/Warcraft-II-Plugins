@@ -40,8 +40,9 @@ int playercolors[] = {       0xA8,         // red
 #define ROC_MUD 0x7E
 #define MUD_WAT 0xAC
 
-#define GOLD 0xFB
-#define OIL  0x00
+BYTE g_gold_col = 0xFB;
+BYTE g_oil_col = 0x00;
+BOOL g_thumb_size = FALSE;
 
 DWORD tilecolors[] = { 0,
                        0xB7,
@@ -182,22 +183,29 @@ HMIBMP* PUDthumbnail( CHAR* pudpath ){
             switch(pUnit->type){
               case 0x5C:
                 // mine
-                draw_mine(hbm,pUnit->x,pUnit->y,pUnit->ai*2500,GOLD);
+                draw_mine(hbm,pUnit->x,pUnit->y,pUnit->ai*2500, g_gold_col);
                 break;
               case 0x5D:
                 // patch 
-                draw_mine(hbm,pUnit->x,pUnit->y,pUnit->ai*2500,OIL); 
+                draw_mine(hbm,pUnit->x,pUnit->y,pUnit->ai*2500, g_oil_col);
                 break;
             }
             pUnit++;
         }
-        
-        if(mapsize==64){
-            scale = 2;  
+
+        if (g_thumb_size)
+        {
+            if (mapsize == 128) {
+                scale = g_thumb_size == 2 ? 2 : 1;
+            }
+            if (mapsize == 64) {
+                scale = g_thumb_size == 2 ? 4 : 2;
+            }
+            if (mapsize == 32) {
+                scale = g_thumb_size == 2 ? 8 : 4;
+            }
         }
-        if(mapsize==32){
-            scale = 4;  
-        }
+
         if(scale>1){
             HMIBMP* hbms = scale_bitmap(hbm,scale);
             free_bitmap(hbm);
