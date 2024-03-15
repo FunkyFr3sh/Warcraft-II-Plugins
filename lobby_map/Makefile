@@ -15,7 +15,7 @@ OBJS = cursor.o dllmain.o lamb.o pudthumb.o
 default: $(W2P).w2p
 
 $(W2P).w2p: $(OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(CXX) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 clean:
 	$(RM) $(OBJS) $(W2P).w2p
