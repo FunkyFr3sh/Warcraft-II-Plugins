@@ -1,7 +1,5 @@
 
 *.w2p
-build.bat
-build.cmd
 *.o
 
 ## Ignore Visual Studio temporary files, build results, and
