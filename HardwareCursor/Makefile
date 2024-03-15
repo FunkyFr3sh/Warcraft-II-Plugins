@@ -1,9 +1,13 @@
 -include config.mk
 
-WINDRES     ?= windres
 W2P          = HardwareCursor
-LDFLAGS      = -mdll -Wl,--enable-stdcall-fixup -Wl,--strip-all -Wl,--exclude-all-symbols
-CFLAGS       = -std=gnu99 -masm=intel
+CC           = i686-w64-mingw32-gcc
+CXX          = i686-w64-mingw32-g++
+WINDRES     ?= i686-w64-mingw32-windres
+LDFLAGS      = -mdll -Wl,--enable-stdcall-fixup -Wl,--strip-all -Wl,--exclude-all-symbols -static
+CFLAGS       = -Iinc -O2 -march=i486 -Wall -masm=intel -Wno-pointer-sign 
+CXXFLAGS     = -Iinc -O2 -march=i486 -Wall -masm=intel
+LIBS         = -lgdi32
 
 OBJS = w2p.o
 
@@ -12,7 +16,7 @@ default: $(W2P).w2p
 
 $(W2P).w2p: $(OBJS)
 	$(WINDRES) -J rc w2p.rc w2p.rc.o
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ w2p.rc.o -lmsvcrt -lgdi32
+	$(CC) $(LDFLAGS) -o $@ $^ w2p.rc.o $(LIBS)
 
 clean:
 	$(RM) $(OBJS) $(W2P).w2p w2p.rc.o
