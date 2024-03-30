@@ -3,6 +3,7 @@
 W2P          = HardwareCursor
 CC           = i686-w64-mingw32-gcc
 CXX          = i686-w64-mingw32-g++
+STRIP       ?= i686-w64-mingw32-strip
 WINDRES     ?= i686-w64-mingw32-windres
 LDFLAGS      = -mdll -Wl,--enable-stdcall-fixup -Wl,--strip-all -Wl,--exclude-all-symbols -static
 CFLAGS       = -Iinc -O2 -march=i486 -Wall -masm=intel -Wno-pointer-sign 
