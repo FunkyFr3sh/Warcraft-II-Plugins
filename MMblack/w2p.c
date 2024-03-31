@@ -14,6 +14,10 @@ void init_colors(int a)
         BYTE paletteIndex = ini_get_int("MMblack", "PaletteIndex", 253, ".\\plugin\\MMblack.ini"); /* Pink (253) */
         patch_setbyte((char *)0x004A48B1, paletteIndex); /* black player index */
     }
+    else
+    {
+        patch_setbyte((char*)0x004A48B1, 0xE4);
+    }
     
     ((void (*)(int))g_proc_0041FBEF)(a);
 }
