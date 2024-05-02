@@ -1,22 +1,24 @@
 -include config.mk
 
-W2P          = PlaySound
-CC           = i686-w64-mingw32-gcc
-CXX          = i686-w64-mingw32-g++
-STRIP       ?= i686-w64-mingw32-strip
-WINDRES     ?= i686-w64-mingw32-windres
-LDFLAGS      = -mdll -Wl,--enable-stdcall-fixup -Wl,--strip-all -Wl,--exclude-all-symbols -static
+TARGET       = PlaySound.w2p
+
+LDFLAGS      = -Wl,--enable-stdcall-fixup -s -shared -static
 CFLAGS       = -Iinc -O2 -march=i486 -Wall -masm=intel -Wno-pointer-sign 
 CXXFLAGS     = -Iinc -O2 -march=i486 -Wall -masm=intel
 LIBS         = -lwinmm
 
+CC           = i686-w64-mingw32-gcc
+CXX          = i686-w64-mingw32-g++
+STRIP       ?= i686-w64-mingw32-strip
+WINDRES     ?= i686-w64-mingw32-windres
+
 OBJS = w2p.o
 
-.PHONY: default
-default: $(W2P).w2p
+.PHONY: default clean
+default: $(TARGET)
 
-$(W2P).w2p: $(OBJS)
+$(TARGET): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 clean:
-	$(RM) $(OBJS) $(W2P).w2p
+	$(RM) $(OBJS) $(TARGET)
