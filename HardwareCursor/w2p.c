@@ -38,6 +38,17 @@ LRESULT CALLBACK fake_wndproc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 
         break;
     }
+    case WM_WINDOWPOSCHANGED:
+    {
+        WINDOWPOS* pos = (WINDOWPOS*)lParam;
+        
+        if (!(pos->flags & SWP_NOSIZE))
+        {
+            SetTimer(W2_HWND, IDT_TIMER_RESIZE, 1000, (TIMERPROC)NULL);
+        }
+        
+        break;
+    }
     case WM_SIZE:
     {
         if (wParam == SIZE_RESTORED || wParam == SIZE_MAXIMIZED)
