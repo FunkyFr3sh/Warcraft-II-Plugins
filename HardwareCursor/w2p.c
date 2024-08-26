@@ -90,6 +90,36 @@ LRESULT CALLBACK fake_wndproc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
     return CallWindowProcA(g_wndproc, hwnd, uMsg, wParam, lParam);
 }
 
+void show_cusor()
+{
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
+    ((void (*)())g_proc_00489705)();
+}
+
+void hide_cusor()
+{
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
+    ((void (*)())g_proc_0048975B)();
+}
+
+void toggle_cursor1()
+{
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
+    ((void (*)())g_proc_004897FA)();
+}
+
+void toggle_cursor2()
+{
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
+    ((void (*)())g_proc_0048983F)();
+}
+
+void toggle_cursor3()
+{
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
+    ((void (*)())g_proc_00489910)();
+}
+
 void draw_cursor(int a, int b, int c, int d)
 {
     //((void (*)(int,int,int,int))0x0048AA20)(a, b, c, d);
@@ -196,36 +226,6 @@ void load_cursors(float scale)
     }
 
     SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
-}
-
-void show_cusor()
-{
-    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
-    ((void (*)())g_proc_00489705)();
-}
-
-void hide_cusor()
-{
-    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
-    ((void (*)())g_proc_0048975B)();
-}
-
-void toggle_cursor1()
-{
-    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
-    ((void (*)())g_proc_004897FA)();
-}
-
-void toggle_cursor2()
-{
-    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
-    ((void (*)())g_proc_0048983F)();
-}
-
-void toggle_cursor3()
-{
-    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
-    ((void (*)())g_proc_00489910)();
 }
 
 void __declspec(dllexport) w2p_init()
