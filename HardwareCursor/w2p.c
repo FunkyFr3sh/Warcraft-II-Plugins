@@ -233,7 +233,17 @@ void __declspec(dllexport) w2p_init()
     /* setup cursors */
     CreateDirectoryA(".\\plugin\\Cursors", NULL);
     
-    real_GetClientRect = (void*)GetProcAddress(LoadLibraryA("user32.dll"), "GetClientRect");
+    /* 
+        We need to get GetClientRect from ddGetProcAddress because
+        the real GetProcAddress is hooked by cnc-ddraw and returns fake values
+    */
+    FARPROC(WINAPI * ddGetProcAddress)(HMODULE, LPCSTR) = 
+        (void*)GetProcAddress(GetModuleHandleA("ddraw.dll"), "DDGetProcAddress");
+
+    if (!ddGetProcAddress)
+        ddGetProcAddress = GetProcAddress;
+
+    real_GetClientRect = (void*)ddGetProcAddress(LoadLibraryA("user32.dll"), "GetClientRect");
 
     g_cursor_size = ini_get_float("Cursor", "Size", 0.0f, ".\\plugin\\HardwareCursor.ini");
     
