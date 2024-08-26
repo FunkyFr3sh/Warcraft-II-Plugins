@@ -90,13 +90,13 @@ LRESULT CALLBACK fake_wndproc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
     return CallWindowProcA(g_wndproc, hwnd, uMsg, wParam, lParam);
 }
 
-void show_cusor()
+void show_cursor()
 {
     SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
     ((void (*)())g_proc_00489705)();
 }
 
-void hide_cusor()
+void hide_cursor()
 {
     SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
     ((void (*)())g_proc_0048975B)();
@@ -265,8 +265,8 @@ void __declspec(dllexport) w2p_init()
     g_wndproc = (WNDPROC)SetWindowLongA(W2_HWND, GWL_WNDPROC, (LONG)fake_wndproc);
 
     /* hook show/hide cursor */
-    g_proc_00489705 = patch_call((void*)0x00489705, (void*)show_cusor);
-    g_proc_0048975B = patch_call((void*)0x0048975B, (void*)hide_cusor);
+    g_proc_00489705 = patch_call((void*)0x00489705, (void*)show_cursor);
+    g_proc_0048975B = patch_call((void*)0x0048975B, (void*)hide_cursor);
     g_proc_004897FA = patch_call((void*)0x004897FA, (void*)toggle_cursor1);
     g_proc_0048983F = patch_call((void*)0x0048983F, (void*)toggle_cursor2);
     g_proc_00489910 = patch_call((void*)0x00489910, (void*)toggle_cursor3);
