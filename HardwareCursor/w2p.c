@@ -8,19 +8,19 @@
 
 #define W2_HWND *((HWND*)0x004CE7B8)
 #define W2_CURSOR_ID *((unsigned char*)0x004AE098)
-#define W2_CFG_BITS *((unsigned int*)0x004D6B00)
 #define W2_GAME_WIDTH  *((unsigned short*)0x004D4A90)
 #define W2_GAME_HEIGHT *((unsigned short*)0x004D4A92)
+#define W2_CURSOR_VISIBLE *((unsigned char*)0x004D48A8)
 
 #define IDT_TIMER_RESIZE 541282672
 
 BOOL(WINAPI* real_GetClientRect)(HWND, LPRECT) = GetClientRect;
-PROC g_proc_0048AAD7, g_proc_00417F28, g_proc_00418026;
 HMODULE g_module;
 WNDPROC g_wndproc;
 HCURSOR g_cursors[256];
-HCURSOR g_animated_cursors[256];
 float g_cursor_size;
+PROC g_proc_0048AAD7, g_proc_00417F28, g_proc_00418026, g_proc_00489705,
+    g_proc_0048975B, g_proc_004897FA, g_proc_0048983F, g_proc_00489910;
 
 void load_cursors(float scale);
 
@@ -32,7 +32,7 @@ LRESULT CALLBACK fake_wndproc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
     {
         if (LOWORD(lParam) == HTCLIENT)
         {
-            SetCursor((W2_CFG_BITS & 0x40) ? g_animated_cursors[W2_CURSOR_ID] : g_cursors[W2_CURSOR_ID]);
+            SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
             return TRUE;
         }
 
@@ -97,13 +97,13 @@ void draw_cursor(int a, int b, int c, int d)
 
 void change_cursor(int a)
 {
-    SetCursor((W2_CFG_BITS & 0x40) ? g_animated_cursors[W2_CURSOR_ID] : g_cursors[W2_CURSOR_ID]);
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
     ((void (*)(int))g_proc_00417F28)(a);
 }
 
 void change_cursor2(int a)
 {
-    SetCursor((W2_CFG_BITS & 0x40) ? g_animated_cursors[W2_CURSOR_ID] : g_cursors[W2_CURSOR_ID]);
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
     ((void (*)(int))g_proc_00418026)(a);
 }
 
@@ -189,55 +189,49 @@ void load_cursors(float scale)
         if (cur)
         {
             if (g_cursors[i])
-            {
-                if (g_animated_cursors[i] == g_cursors[i])
-                    g_animated_cursors[i] = NULL;
-
                 DestroyCursor(g_cursors[i]);
-            }
 
             g_cursors[i] = cur;
         }
-
-        _snprintf(cursor_path, sizeof(cursor_path), ".\\plugin\\Cursors\\Animated\\cursor%d.ani", i);
-
-        if (!FILE_EXISTS(cursor_path))
-            extract_resource(i + 2000, cursor_path);
-
-        cur = (HCURSOR)LoadImageA(NULL, cursor_path, IMAGE_CURSOR, 0, 0, LR_LOADFROMFILE);
-        size.cy = 0;
-        size.cx = 0;
-
-        if (cur)
-        {
-            get_cursor_size(cur, &size);
-            DestroyCursor(cur);
-        }
-
-        cur = 
-            (HCURSOR)LoadImageA(
-                NULL, cursor_path, IMAGE_CURSOR, (UINT)(size.cx * scale), (UINT)(size.cy * scale), LR_LOADFROMFILE);
-
-        if (cur)
-        {
-            if (g_animated_cursors[i])
-                DestroyCursor(g_animated_cursors[i]);
-
-            g_animated_cursors[i] = cur;
-        }
-
-        if (!g_animated_cursors[i])
-            g_animated_cursors[i] = g_cursors[i];
     }
 
-    SetCursor((W2_CFG_BITS & 0x40) ? g_animated_cursors[W2_CURSOR_ID] : g_cursors[W2_CURSOR_ID]);
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
+}
+
+void show_cusor()
+{
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
+    ((void (*)())g_proc_00489705)();
+}
+
+void hide_cusor()
+{
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
+    ((void (*)())g_proc_0048975B)();
+}
+
+void toggle_cursor1()
+{
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
+    ((void (*)())g_proc_004897FA)();
+}
+
+void toggle_cursor2()
+{
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
+    ((void (*)())g_proc_0048983F)();
+}
+
+void toggle_cursor3()
+{
+    SetCursor(W2_CURSOR_VISIBLE ? g_cursors[W2_CURSOR_ID] : NULL);
+    ((void (*)())g_proc_00489910)();
 }
 
 void __declspec(dllexport) w2p_init()
 {
     /* setup cursors */
     CreateDirectoryA(".\\plugin\\Cursors", NULL);
-    CreateDirectoryA(".\\plugin\\Cursors\\Animated", NULL);
     
     real_GetClientRect = (void*)GetProcAddress(LoadLibraryA("user32.dll"), "GetClientRect");
 
@@ -259,6 +253,13 @@ void __declspec(dllexport) w2p_init()
 
     /* hook wndproc */
     g_wndproc = (WNDPROC)SetWindowLongA(W2_HWND, GWL_WNDPROC, (LONG)fake_wndproc);
+
+    /* hook show/hide cursor */
+    g_proc_00489705 = patch_call((void*)0x00489705, (void*)show_cusor);
+    g_proc_0048975B = patch_call((void*)0x0048975B, (void*)hide_cusor);
+    g_proc_004897FA = patch_call((void*)0x004897FA, (void*)toggle_cursor1);
+    g_proc_0048983F = patch_call((void*)0x0048983F, (void*)toggle_cursor2);
+    g_proc_00489910 = patch_call((void*)0x00489910, (void*)toggle_cursor3);
 
     /* hook change cursor */
     g_proc_00417F28 = patch_call((void*)0x00417F28, (void*)change_cursor);
